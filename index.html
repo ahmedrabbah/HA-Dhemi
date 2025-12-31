@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>هدية حب • HA Dhemi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&family=Marhey:wght@300;400;500;600&family=Cairo:wght@400;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff2e63;
+            --secondary-color: #08d9d6;
+            --gold-color: #ffd700;
+            --love-color: #ff4081;
+            --dark-bg: #0a0a0a;
+            --gradient: linear-gradient(135deg, #ff2e63, #ff8e53, #ffd700);
+            --gradient-reverse: linear-gradient(135deg, #ffd700, #ff8e53, #ff2e63);
+            --love-gradient: linear-gradient(135deg, #ff4081, #ff2e63, #ff6b6b);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Cairo', 'El Messiri', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            position: fixed;
+            touch-action: manipulation;
+        }
+
+        /* شاشة البداية */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 1s ease, transform 1s ease;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .splash-heart-container {
+            position: relative;
+            width: clamp(120px, 30vw, 200px);
+            height: clamp(120px, 30vw, 200px);
+            margin-bottom: clamp(20px, 5vw, 40px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .splash-heart {
+            width: 100%;
+            height: 100%;
+            background: var(--love-gradient);
+            position: relative;
+            transform: rotate(45deg);
+            border-radius: 10px;
+            box-shadow: 
+                0 0 60px var(--love-color),
+                0 0 120px rgba(255, 64, 129, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .splash-heart:before,
+        .splash-heart:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--love-gradient);
+            border-radius: 50%;
+        }
+
+        .splash-heart:before {
+            top: -50%;
+            left: 0;
+        }
+
+        .splash-heart:after {
+            top: 0;
+            left: -50%;
+        }
+
+        .splash-title {
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            font-weight: 800;
+            background: var(--love-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Marhey', sans-serif;
+            text-shadow: 0 0 20px rgba(255, 64, 129, 0.3);
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+
+        .splash-subtitle {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            font-weight: 500;
+            padding: 0 15px;
+        }
+
+        .splash-name {
+            font-size: clamp(1.4rem, 4.5vw, 2rem);
+            color: var(--gold-color);
+            text-align: center;
+            margin-bottom: clamp(20px, 5vw, 40px);
+            font-family: 'Dancing Script', 'Cairo', cursive;
+            font-weight: 600;
+            padding: 8px 25px;
+            border: 2px solid var(--gold-color);
+            border-radius: 50px;
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(5px);
+            max-width: 90%;
+            word-break: keep-all;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .start-button {
+            width: clamp(160px, 50vw, 220px);
+            height: clamp(50px, 8vh, 65px);
+            background: var(--love-gradient);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 6px 20px rgba(255, 64, 129, 0.4),
+                0 0 40px rgba(255, 64, 129, 0.2);
+            font-family: 'Cairo', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding: 0 25px;
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .start-button:hover::before,
+        .start-button:active::before {
+            left: 100%;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 10px 25px rgba(255, 64, 129, 0.6),
+                0 0 50px rgba(255, 64, 129, 0.3);
+        }
+
+        .start-button:active {
+            transform: translateY(-1px);
+            box-shadow: 
+                0 4px 15px rgba(255, 64, 129, 0.4),
+                0 0 30px rgba(255, 64, 129, 0.2);
+        }
+
+        .start-button i {
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        .splash-instruction {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+            padding: 0 15px;
+            animation: fadeInOut 3s infinite;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* النجوم الخلفية للصفحة الأولى */
+        .splash-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .splash-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        /* شاشة التحميل */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s, visibility 0.8s;
+        }
+
+        .loader-heart {
+            width: 100px;
+            height: 100px;
+            background: var(--love-color);
+            position: relative;
+            transform: rotate(45deg);
+            margin-bottom: 30px;
+            animation: heartBeat 1.2s ease-in-out infinite;
+            box-shadow: 0 0 50px var(--love-color);
+        }
+
+        .loader-heart:before,
+        .loader-heart:after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: var(--love-color);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .loader-heart:before {
+            top: -50px;
+            left: 0;
+        }
+
+        .loader-heart:after {
+            top: 0;
+            left: -50px;
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-top: 20px;
+            text-align: center;
+            font-family: 'Marhey', cursive;
+        }
+
+        /* الشاشة الرئيسية */
+        #main-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: none;
+            overflow: hidden;
+        }
+
+        /* خلفية النجوم */
+        #stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        /* الاسم المائي - HA Dhemi */
+        .watermark-name {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25vw;
+            font-weight: 900;
+            color: rgba(255, 64, 129, 0.05);
+            z-index: 1;
+            white-space: nowrap;
+            pointer-events: none;
+            font-family: 'Marhey', cursive;
+            letter-spacing: 2px;
+        }
+
+        /* العد التنازلي */
+        #countdown-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .year-display {
+            font-size: clamp(3rem, 15vw, 8rem);
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 46, 99, 0.3);
+            font-family: 'Marhey', cursive;
+        }
+
+        .countdown-container {
+            display: flex;
+            gap: clamp(10px, 3vw, 25px);
+            margin: 30px 0;
+        }
+
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+
+        .countdown-value {
+            font-size: clamp(2.5rem, 10vw, 4rem);
+            font-weight: 700;
+            background: var(--gradient-reverse);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            font-family: 'Marhey', cursive;
+        }
+
+        .countdown-label {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            color: var(--secondary-color);
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .countdown-separator {
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: var(--gold-color);
+            margin: 0 5px;
+            line-height: 1;
+        }
+
+        /* رسالة العد التنازلي */
+        .countdown-message {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: #fff;
+            text-align: center;
+            max-width: 600px;
+            margin-top: 20px;
+            line-height: 1.6;
+            padding: 0 20px;
+            opacity: 0.9;
+        }
+
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* شاشة 2026 */
+        #year2026-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .year-2026 {
+            font-size: clamp(5rem, 25vw, 12rem);
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 50px rgba(255, 46, 99, 0.5);
+            margin-bottom: 20px;
+            font-family: 'Marhey', cursive;
+            animation: glow 2s infinite alternate;
+        }
+
+        .welcome-message {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            color: white;
+            text-align: center;
+            margin: 20px 0;
+            padding: 0 20px;
+            line-height: 1.4;
+        }
+
+        .name-highlight {
+            font-family: 'Marhey', cursive;
+            background: linear-gradient(45deg, var(--secondary-color), var(--gold-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        /* شاشة القصيدة */
+        #poem-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 4;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .poem-title {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            background: var(--love-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Marhey', cursive;
+            text-shadow: 0 0 30px rgba(255, 64, 129, 0.3);
+        }
+
+        .poem-name {
+            font-size: 1.5rem;
+            color: var(--gold-color);
+            margin-bottom: 50px;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            padding: 10px 30px;
+            border: 2px solid var(--gold-color);
+            border-radius: 50px;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        #poem {
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                        0 0 100px rgba(255, 64, 129, 0.2);
+            position: relative;
+            overflow: hidden;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #poem::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 64, 129, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(8, 217, 214, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .line {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ffffff;
+            font-family: 'Scheherazade New', serif;
+            position: relative;
+            padding: 15px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .line:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .line.highlight {
+            color: var(--gold-color);
+            font-weight: 700;
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .line:first-child {
+            color: var(--secondary-color);
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(8, 217, 214, 0.3);
+        }
+
+        .love-heart {
+            color: var(--love-color);
+            font-size: 1.5em;
+            margin: 0 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* الألعاب النارية */
+        .fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* مشغل الموسيقى */
+        #music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .music-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+        }
+
+        .music-btn:active {
+            transform: scale(0.95);
+        }
+
+        .song-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .song-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .song-artist {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        /* شريط التقدم */
+        #progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 99;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+
+        /* مؤشر التحميل */
+        #loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient);
+            z-index: 1001;
+            transition: width 0.3s;
+        }
+
+        /* أزرار التنقل */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        /* الأنماط المتحركة */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @keyframes heartBeat {
+            0% { transform: rotate(45deg) scale(1); }
+            5% { transform: rotate(45deg) scale(1.1); }
+            10% { transform: rotate(45deg) scale(1); }
+            15% { transform: rotate(45deg) scale(1.1); }
+            50% { transform: rotate(45deg) scale(1); }
+            100% { transform: rotate(45deg) scale(1); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 46, 99, 0.7); }
+            to { text-shadow: 0 0 30px rgba(255, 46, 99, 0.9), 0 0 40px rgba(255, 46, 99, 0.5); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.8; }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* تصميم متجاوب للجوال */
+        @media (max-width: 768px) {
+            .watermark-name {
+                font-size: 30vw;
+            }
+            
+            .countdown-container {
+                gap: 10px;
+            }
+            
+            .countdown-unit {
+                min-width: 60px;
+            }
+            
+            .music-btn {
+                width: 45px;
+                height: 45px;
+            }
+            
+            #music-player {
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+                justify-content: center;
+                padding: 10px 15px;
+            }
+            
+            .volume-slider {
+                width: 60px;
+            }
+            
+            #poem {
+                padding: 20px;
+                max-height: 60vh;
+            }
+            
+            .line {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+            
+            .nav-buttons {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-container {
+                gap: 5px;
+            }
+            
+            .countdown-unit {
+                min-width: 50px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.8rem;
+            }
+            
+            .countdown-separator {
+                font-size: 1.5rem;
+            }
+            
+            #poem {
+                padding: 15px;
+            }
+            
+            .line {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+                padding: 10px;
+            }
+            
+            .poem-title {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* دعم iPhone */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                height: -webkit-fill-available;
+            }
+            
+            #splash-screen {
+                height: -webkit-fill-available;
+                min-height: -webkit-fill-available;
+            }
+            
+            #main-container {
+                height: -webkit-fill-available;
+            }
+            
+            #poem-section {
+                height: -webkit-fill-available;
+            }
+        }
+
+        /* تخصيص شريط التمرير */
+        #poem::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #poem::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        #poem::-webkit-scrollbar-thumb {
+            background: var(--love-gradient);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة البداية -->
+    <div id="splash-screen">
+        <div class="splash-stars" id="splash-stars"></div>
+        
+        <div class="splash-heart-container">
+            <div class="splash-heart"></div>
+        </div>
+        
+        <h1 class="splash-title">هدية حب خاصة</h1>
+        <div class="splash-subtitle">إلى حبيبتي الغالية</div>
+        <div class="splash-name" id="splash-name">HA Dhemi ❤️</div>
+        
+        <button class="start-button" id="startButton">
+            <i class="fas fa-play-circle"></i>
+            ابدأ الرحلة
+        </button>
+        
+        <div class="splash-instruction">
+            اضغط على الزر لبدء رحلة الحب والموسيقى
+        </div>
+    </div>
+
+    <!-- شاشة التحميل -->
+    <div id="loader" style="display: none;">
+        <div class="loader-heart"></div>
+        <div class="loader-text">جاري تحضير رحلة الحب الخاصة بك...</div>
+    </div>
+
+    <!-- الحاوية الرئيسية -->
+    <div id="main-container">
+        <!-- خلفية النجوم -->
+        <div id="stars-container"></div>
+
+        <!-- الاسم المائي -->
+        <div class="watermark-name">HA Dhemi</div>
+
+        <!-- أزرار التنقل -->
+        <div class="nav-buttons">
+            <button class="nav-btn" id="homeBtn" title="الرئيسية">
+                <i class="fas fa-home"></i>
+            </button>
+            <button class="nav-btn" id="poemBtn" title="القصيدة">
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+
+        <!-- قسم العد التنازلي -->
+        <section id="countdown-section">
+            <div class="year-display">2026</div>
+            
+            <div class="countdown-container">
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">أيام</div>
+                </div>
+                
+                <div class="countdown-separator">:</div>
+                
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">ساعات</div>
+                </div>
+                
+                <div class="countdown-separator">:</div>
+                
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">دقائق</div>
+                </div>
+                
+                <div class="countdown-separator">:</div>
+                
+                <div class="countdown-unit">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">ثواني</div>
+                </div>
+            </div>
+            
+            <div class="countdown-message">
+                العد التنازلي لبداية عام <span class="highlight">2026</span> المليء بالأحلام والحب<br>
+                <span style="font-size: 0.9em; color: var(--gold-color);">هدية خاصة لـ <span style="font-family: 'Marhey';">HA Dhemi</span></span>
+            </div>
+        </section>
+
+        <!-- قسم سنة 2026 -->
+        <section id="year2026-section">
+            <div class="fireworks-container" id="fireworks"></div>
+            <div class="year-2026">2026</div>
+            <div class="welcome-message">
+                كل عام وأنتِ <span class="name-highlight">HA Dhemi</span> بألف خير<br>
+                عام جديد مليء بالحب والسعادة
+            </div>
+        </section>
+
+        <!-- قسم القصيدة -->
+        <section id="poem-section">
+            <div class="fireworks-container" id="poem-fireworks"></div>
+            <h1 class="poem-title">رسالة حب إلى الأبد</h1>
+            <div class="poem-name">إلى حبيبتي HA Dhemi</div>
+            
+            <div id="poem">
+                <p class="line">في نهاية عام 2025،</p>
+
+                <p class="line">
+                    إن ضاقت الدنيا عليكِ يومًا،<br>
+                    فتأكدي أنني وهبتكِ قلبي<br>
+                    موطنًا آمنًا.
+                </p>
+
+                <p class="line">
+                    أحبك<span class="love-heart">❤️</span><br>
+                    ولا أرتجي بعد حبكِ مرجعًا.
+                </p>
+
+                <p class="line">
+                    كان الذي في قلبي سحرًا أصابني،<br>
+                    فأمسى جنون الحب في كل موضع.
+                </p>
+
+                <p class="line">
+                    أنتِ الروح التي تسكن بين أضلعي،<br>
+                    وقلبي الذي ينبض باسمك،<br>
+                    ومسمعي الذي لا يُصغي إلا لصوتك.
+                </p>
+
+                <p class="line">
+                    أُغلق هذا العام وأنا أكثر يقينًا بكِ،<br>
+                    وأفتح العام الجديد<br>
+                    وأنا أختارك…
+                </p>
+
+                <p class="line highlight">
+                    كما أنتِ،<br>
+                    بكل الحب،<br>
+                    ولكل العمر ❤️
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- مشغل الموسيقى -->
+    <div id="music-player" style="display: none;">
+        <button class="music-btn" id="playPauseBtn">
+            <i class="fas fa-play"></i>
+        </button>
+        
+        <div class="song-info">
+            <div class="song-title" id="current-song-title">موسيقى رومانسية</div>
+            <div class="song-artist" id="current-song-artist">خاص لحبيبتي HA Dhemi</div>
+        </div>
+        
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+    </div>
+
+    <!-- شريط تقدم الموسيقى -->
+    <div id="progress-container" style="display: none;">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- عنصر الصوت -->
+    <audio id="background-music" preload="auto" loop>
+        <source src="https://g.top4top.io/m_3652fmnnf1.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunrise-1257.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // عناصر واجهة المستخدم
+        const splashScreen = document.getElementById('splash-screen');
+        const startButton = document.getElementById('startButton');
+        const loader = document.getElementById('loader');
+        const mainContainer = document.getElementById('main-container');
+        const countdownSection = document.getElementById('countdown-section');
+        const year2026Section = document.getElementById('year2026-section');
+        const poemSection = document.getElementById('poem-section');
+        const starsContainer = document.getElementById('stars-container');
+        const fireworksContainer = document.getElementById('fireworks');
+        const poemFireworksContainer = document.getElementById('poem-fireworks');
+        const musicPlayer = document.getElementById('music-player');
+        const progressContainer = document.getElementById('progress-container');
+        
+        // عناصر العد التنازلي
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+        
+        // عناصر الموسيقى
+        const music = document.getElementById('background-music');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playPauseIcon = playPauseBtn.querySelector('i');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressBar = document.getElementById('progress-bar');
+        const currentSongTitle = document.getElementById('current-song-title');
+        const currentSongArtist = document.getElementById('current-song-artist');
+        
+        // أزرار التنقل
+        const homeBtn = document.getElementById('homeBtn');
+        const poemBtn = document.getElementById('poemBtn');
+        
+        // متغيرات العد التنازلي
+        let countdownInterval;
+        // ضبط التاريخ الهدف إلى 1 يناير 2026
+        let targetDate = new Date().getTime() + 5000;
+        let currentSection = 'countdown';
+        let poemViewed = false;
+        let fireworksInterval;
+        let isMusicPlaying = false;
+        let userInteracted = false;
+
+        // إنشاء النجوم للصفحة الأولى
+        function createSplashStars() {
+            const starsContainer = document.getElementById('splash-stars');
+            if (!starsContainer) return;
+            
+            // حساب عدد النجوم بناءً على حجم الشاشة
+            const starCount = Math.min(150, Math.floor(window.innerWidth * window.innerHeight / 3000));
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'splash-star';
+                
+                const size = Math.random() * 2 + 0.5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                
+                const colors = ['#ffffff', '#ffd700', '#08d9d6', '#ff8e53'];
+                star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                star.style.opacity = '0.3';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // إنشاء النجوم للشاشة الرئيسية
+        function createStars() {
+            if (!starsContainer) return;
+            
+            // مسح النجوم القديمة
+            starsContainer.innerHTML = '';
+            
+            const starCount = window.innerWidth < 768 ? 150 : 300;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3 + 0.5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                
+                const colors = ['#ffffff', '#ffd700', '#08d9d6', '#ff8e53', '#ff4081'];
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // إنشاء الألعاب النارية
+        function createFirework(x, y, container = fireworksContainer) {
+            if (!container) return;
+            
+            const firework = document.createElement('div');
+            firework.style.position = 'absolute';
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+            firework.style.width = '5px';
+            firework.style.height = '5px';
+            firework.style.borderRadius = '50%';
+            firework.style.background = `radial-gradient(circle, ${getRandomColor()}, transparent)`;
+            firework.style.boxShadow = `0 0 20px ${getRandomColor()}`;
+            firework.style.zIndex = '1';
+            
+            container.appendChild(firework);
+            
+            const particles = 50;
+            for (let i = 0; i < particles; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.style.position = 'absolute';
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    particle.style.width = '3px';
+                    particle.style.height = '3px';
+                    particle.style.borderRadius = '50%';
+                    particle.style.background = getRandomColor();
+                    particle.style.boxShadow = `0 0 10px ${getRandomColor()}`;
+                    particle.style.zIndex = '1';
+                    
+                    container.appendChild(particle);
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 2;
+                    const vx = Math.cos(angle) * speed;
+                    const vy = Math.sin(angle) * speed;
+                    
+                    let posX = x;
+                    let posY = y;
+                    const gravity = 0.1;
+                    
+                    const particleInterval = setInterval(() => {
+                        posX += vx;
+                        posY += vy;
+                        vy += gravity;
+                        
+                        particle.style.left = `${posX}px`;
+                        particle.style.top = `${posY}px`;
+                        particle.style.opacity = parseFloat(particle.style.opacity || 1) - 0.02;
+                        
+                        if (posY > window.innerHeight || parseFloat(particle.style.opacity) <= 0) {
+                            clearInterval(particleInterval);
+                            particle.remove();
+                        }
+                    }, 30);
+                }, i * 20);
+            }
+            
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff2e63', '#08d9d6', '#ffd700', '#ff8e53', '#ff4081', '#9d4edd'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // تشغيل الألعاب النارية
+        function startFireworks(container = fireworksContainer, continuous = true) {
+            if (!container) return;
+            
+            // إزالة أي ألعاب نارية سابقة
+            if (fireworksInterval) {
+                clearInterval(fireworksInterval);
+            }
+            
+            // تشغيل دفعة أولية
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight * 0.7;
+                    createFirework(x, y, container);
+                }, i * 300);
+            }
+            
+            if (!continuous) return;
+            
+            // استمرار الألعاب النارية
+            fireworksInterval = setInterval(() => {
+                if (Math.random() > 0.3) {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight * 0.7;
+                    createFirework(x, y, container);
+                }
+            }, 800);
+        }
+        
+        // إيقاف الألعاب النارية
+        function stopFireworks() {
+            if (fireworksInterval) {
+                clearInterval(fireworksInterval);
+                fireworksInterval = null;
+            }
+        }
+        
+        // تحديث العد التنازلي
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                daysElement.textContent = '00';
+                hoursElement.textContent = '00';
+                minutesElement.textContent = '00';
+                secondsElement.textContent = '00';
+                
+                switchSection('2026');
+                startFireworks();
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate([500, 200, 500, 200, 500]);
+                }
+                
+                // الانتقال التلقائي للقصيدة بعد 8 ثواني
+                setTimeout(() => {
+                    switchSection('poem');
+                }, 8000);
+                
+                return;
+            }
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            daysElement.textContent = days.toString().padStart(2, '0');
+            hoursElement.textContent = hours.toString().padStart(2, '0');
+            minutesElement.textContent = minutes.toString().padStart(2, '0');
+            secondsElement.textContent = seconds.toString().padStart(2, '0');
+            
+            if (seconds === 59 && navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+        }
+        
+        // تبديل الأقسام
+        function switchSection(section) {
+            // إخفاء جميع الأقسام
+            countdownSection.style.opacity = '0';
+            countdownSection.style.transform = 'scale(0.8)';
+            countdownSection.style.pointerEvents = 'none';
+            
+            year2026Section.style.opacity = '0';
+            year2026Section.style.transform = 'scale(0.8)';
+            year2026Section.style.pointerEvents = 'none';
+            
+            poemSection.style.opacity = '0';
+            poemSection.style.transform = 'translateY(50px)';
+            poemSection.style.pointerEvents = 'none';
+            
+            // إيقاف الألعاب النارية القديمة
+            stopFireworks();
+            
+            setTimeout(() => {
+                switch(section) {
+                    case 'countdown':
+                        countdownSection.style.opacity = '1';
+                        countdownSection.style.transform = 'scale(1)';
+                        countdownSection.style.pointerEvents = 'auto';
+                        currentSection = 'countdown';
+                        break;
+                        
+                    case '2026':
+                        year2026Section.style.opacity = '1';
+                        year2026Section.style.transform = 'scale(1)';
+                        year2026Section.style.pointerEvents = 'auto';
+                        currentSection = '2026';
+                        
+                        startFireworks();
+                        break;
+                        
+                    case 'poem':
+                        poemSection.style.opacity = '1';
+                        poemSection.style.transform = 'translateY(0)';
+                        poemSection.style.pointerEvents = 'auto';
+                        currentSection = 'poem';
+                        
+                        // تشغيل الألعاب النارية الخاصة بالقسم
+                        setTimeout(() => {
+                            startFireworks(poemFireworksContainer, false);
+                        }, 500);
+                        
+                        // إضافة تأثيرات للأسطر
+                        const lines = document.querySelectorAll('#poem .line');
+                        lines.forEach((line, index) => {
+                            setTimeout(() => {
+                                line.style.animation = 'fadeIn 0.8s ease forwards';
+                                line.style.opacity = '0';
+                                line.style.animationDelay = `${index * 0.2}s`;
+                                line.style.animationFillMode = 'forwards';
+                            }, 100);
+                        });
+                        
+                        // اهتزاز خفيف للجوال
+                        if (navigator.vibrate && !poemViewed) {
+                            navigator.vibrate([200, 100, 200]);
+                            poemViewed = true;
+                        }
+                        break;
+                }
+            }, 300);
+        }
+        
+        // بدء التطبيق
+        function startApplication() {
+            if (!userInteracted) {
+                userInteracted = true;
+            }
+            
+            // تأثير النقر على الزر
+            startButton.style.transform = 'scale(0.95)';
+            startButton.style.opacity = '0.8';
+            
+            setTimeout(() => {
+                startButton.style.transform = '';
+                startButton.style.opacity = '';
+            }, 150);
+            
+            // اهتزاز خفيف للجوال
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            // تأثير اختفاء الصفحة الأولى
+            splashScreen.style.opacity = '0';
+            splashScreen.style.transform = 'scale(1.1)';
+            
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                loader.style.display = 'flex';
+                
+                // إنشاء النجوم للشاشة الرئيسية
+                createStars();
+                
+                // بدء العد التنازلي
+                updateCountdown();
+                countdownInterval = setInterval(updateCountdown, 1000);
+                
+                // تهيئة الموسيقى
+                music.volume = volumeSlider.value / 100;
+                
+                // إظهار شاشة التحميل ثم الانتقال
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        mainContainer.style.display = 'block';
+                        musicPlayer.style.display = 'flex';
+                        progressContainer.style.display = 'block';
+                        
+                        // محاولة تشغيل الموسيقى
+                        playMusic();
+                    }, 500);
+                }, 2000);
+            }, 800);
+        }
+        
+        // تشغيل الموسيقى
+        function playMusic() {
+            if (!userInteracted) return;
+            
+            const playPromise = music.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    playPauseIcon.classList.remove('fa-play');
+                    playPauseIcon.classList.add('fa-pause');
+                    isMusicPlaying = true;
+                }).catch(e => {
+                    console.log('يتطلب تفاعل المستخدم لتشغيل الموسيقى');
+                    playPauseIcon.classList.remove('fa-pause');
+                    playPauseIcon.classList.add('fa-play');
+                    isMusicPlaying = false;
+                });
+            }
+        }
+        
+        // التحكم بالموسيقى
+        playPauseBtn.addEventListener('click', () => {
+            userInteracted = true;
+            
+            if (music.paused) {
+                playMusic();
+            } else {
+                music.pause();
+                playPauseIcon.classList.remove('fa-pause');
+                playPauseIcon.classList.add('fa-play');
+                isMusicPlaying = false;
+            }
+        });
+        
+        // تغيير مستوى الصوت
+        volumeSlider.addEventListener('input', () => {
+            music.volume = volumeSlider.value / 100;
+        });
+        
+        // تحديث شريط التقدم
+        music.addEventListener('timeupdate', () => {
+            if (music.duration) {
+                const progress = (music.currentTime / music.duration) * 100;
+                progressBar.style.width = `${progress}%`;
+                
+                if (!music.paused) {
+                    playPauseIcon.classList.remove('fa-play');
+                    playPauseIcon.classList.add('fa-pause');
+                    isMusicPlaying = true;
+                }
+            }
+        });
+        
+        // أزرار التنقل
+        homeBtn.addEventListener('click', () => {
+            switchSection('countdown');
+        });
+        
+        poemBtn.addEventListener('click', () => {
+            switchSection('poem');
+        });
+        
+        // زر البداية
+        startButton.addEventListener('click', startApplication);
+        
+        // دالة تأثير الكتابة
+        function typeWriterEffect() {
+            const nameElement = document.getElementById('splash-name');
+            if (!nameElement) return;
+            
+            const originalText = 'HA Dhemi ❤️';
+            nameElement.textContent = '';
+            let i = 0;
+            
+            function typeCharacter() {
+                if (i < originalText.length) {
+                    nameElement.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeCharacter, 100);
+                }
+            }
+            
+            setTimeout(typeCharacter, 1000);
+        }
+        
+        // عند اكتمال تحميل الصفحة
+        window.addEventListener('load', () => {
+            // إنشاء النجوم للصفحة الأولى
+            createSplashStars();
+            
+            // إضافة تأثير كتابة للاسم
+            typeWriterEffect();
+            
+            // تعيين معلومات الموسيقى
+            currentSongTitle.textContent = 'موسيقى رومانسية';
+            currentSongArtist.textContent = 'خاص لحبيبتي HA Dhemi';
+            
+            // ضبط مستوى الصوت الافتراضي
+            music.volume = 0.7;
+        });
+        
+        // إعادة حساب النجوم عند تغيير حجم النافذة
+        window.addEventListener('resize', () => {
+            // للصفحة الأولى
+            const splashStarsContainer = document.getElementById('splash-stars');
+            if (splashStarsContainer) {
+                splashStarsContainer.innerHTML = '';
+                createSplashStars();
+            }
+            
+            // للشاشة الرئيسية
+            if (starsContainer && mainContainer.style.display === 'block') {
+                createStars();
+            }
+        });
+        
+        // حماية من التكبير/التصغير على الجوال
+        document.addEventListener('gesturestart', (e) => {
+            e.preventDefault();
+        });
+        
+        // تأثيرات إضافية للقصيدة عند التمرير
+        const poemContainer = document.getElementById('poem');
+        if (poemContainer) {
+            poemContainer.addEventListener('scroll', () => {
+                const scrollTop = poemContainer.scrollTop;
+                const scrollHeight = poemContainer.scrollHeight - poemContainer.clientHeight;
+                const scrollPercentage = scrollTop / scrollHeight;
+                
+                if (scrollPercentage > 0.9 && Math.random() > 0.7) {
+                    const x = Math.random() * poemContainer.clientWidth;
+                    const y = poemContainer.scrollTop + Math.random() * 100;
+                    createFirework(x, y, poemFireworksContainer);
+                }
+            });
+        }
+        
+        // دعم اللمس للهواتف الذكية
+        document.addEventListener('touchstart', () => {
+            userInteracted = true;
+        });
+        
+        // معالجة أخطاء الصوت
+        music.addEventListener('error', (e) => {
+            console.log('خطأ في تحميل ملف الصوت:', e);
+            currentSongTitle.textContent = 'موسيقى غير متاحة حالياً';
+            currentSongArtist.textContent = 'ركز على رسالة الحب ❤️';
+        });
+    </script>
+</body>
+</html>
